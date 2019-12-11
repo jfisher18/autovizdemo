@@ -3,13 +3,6 @@
 .awcache
 main.pdf
 
-#yiru local log
-yiru*
-
-# temp input output
-src/2018/data/input*
-src/2018/data/output*
-
 node_modules/
 package-lock.json
 
