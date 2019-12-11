@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.8.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.0-beta.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.1.0"></script>
+  <title>Dynamic AutoViz Example</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <div>
+    <input class="slider" type="range" id="start" name="volume" min="0" max="669">
+  </div>
+  <p id ="query">Query</p>
+  <table >
+  <tr>
+    <th>Borough</th>
+    <th>Crash Count</th>
+  </tr>
+  <tr>
+    <td>BRONX</td>
+    <td id = "b0"></td>
+  </tr>
+  <tr>
+    <td>BROOKLYN</td>
+    <td id = "b1"></td>
+  </tr>
+  <tr>
+    <td>MANHATTAN</td>
+    <td id = "b2"></td>
+  </tr>
+  <tr>
+    <td>QUEENS</td>
+    <td id = "b3"></td>
+  </tr>
+  <tr>
+    <td>STATEN ISLAND</td>
+    <td id = "b4"></td>
+  </tr>
+</table>
+<div id="vis1"></div></table>
+<div id="vis2"></div>
+
+</body>
+<script src="js/data.js"></script>
