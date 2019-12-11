@@ -15,6 +15,12 @@ function twoDigit(num){
 }
 
 var queryMap = new Map();
+//669
+var sliderRange = [0,30];
+var step = 1;
+let graphRanges = [[0,15],[16,30]];//will need to actually compute
+
+//precompute map of values
 let db = new sqlite3.Database('./crashes.db', (err) => {
   if (err) {
     console.error(err.message);
@@ -22,15 +28,43 @@ let db = new sqlite3.Database('./crashes.db', (err) => {
   console.log('DB Connected');
   var startDate = new Date('January 2, 2018');
   var dateLimit = new Date('November 2, 2019');
-  for (let i = 0; i <=669; i++){
+  for (let i = sliderRange[0]; i <=sliderRange[1]; i++){
     dateLimit = startDate.addDays(i)
-    queryStr = `SELECT borough, COUNT(*) as crashes FROM CRASHES WHERE borough!="" AND date<="${dateLimit.getFullYear()}-${twoDigit(dateLimit.getMonth()+1)}-${twoDigit(dateLimit.getDate())}" GROUP BY borough;`
-    db.all(queryStr, [], (err, rows) => {
-      queryMap.set(i, rows)
+    dateStr = `${dateLimit.getFullYear()}-${twoDigit(dateLimit.getMonth()+1)}-${twoDigit(dateLimit.getDate())}`
+    queryStr = 'SELECT borough, COUNT(*) as crashes FROM CRASHES WHERE borough!="" AND date<=? GROUP BY borough;'
+    db.all(queryStr, [dateStr], (err, rows) => {
+      queryMap.set(i, {data: rows, query: queryStr})
       console.log(i)
     })
   }
 });
+
+let scalesComputed = false;
+
+function computeScales(){
+  for (let range of graphRanges){
+    for (let i = range[0]; i <= range[1]; i++){
+      var max = 0;
+      var data_obj = queryMap.get(i);
+      for (let borough of data_obj.data){
+        if (borough.crashes > max){
+          max = borough.crashes
+        }
+      }
+      let scale_domain = [0,max];
+      for (let i = range[0]; i <= range[1]; i++){
+        var data_obj = queryMap.get(i);
+        data_obj.scale_domain = scale_domain
+        queryMap.set(i,data_obj)
+      }
+    }
+
+  }
+  scalesComputed = true;
+}
+
+
+
 
 const express = require('express');
 const app = express();
@@ -48,22 +82,13 @@ app.get('/', function(req, res) {
 
 
 io.on('connection', function(socket){
-  db.get('SELECT MAX(count) as max FROM (SELECT borough, COUNT(*) as count FROM CRASHES WHERE borough!="" GROUP BY borough)', [], (err, row) => {
-    if (err) {
-      throw err;l
-    }
-    socket.emit('max',row.max);
-  });
+  socket.emit('init',sliderRange);
   socket.on('query', function(index){
+    if(!scalesComputed){
+      computeScales();
+    }
     socket.emit('data', queryMap.get(parseInt(index)))
-    // db.all(query, [], (err, rows) => {
-    //   if (err) {
-    //     throw err;
-    //   }
-    //   socket.emit('data',rows);
-    // });
   });
 });
-
 
 http.listen(port, () => console.log(`Listening on port ${port}!`))
