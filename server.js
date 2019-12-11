@@ -16,9 +16,9 @@ function twoDigit(num){
 
 var queryMap = new Map();
 //669
-var sliderRange = [0,30];
+var sliderRange = [0,669];
 var step = 1;
-let graphRanges = [[0,15],[16,30]];//will need to actually compute
+let graphRanges = [[0,100],[101,300],[301,669]];//will need to actually compute
 
 //precompute map of values
 let db = new sqlite3.Database('./crashes.db', (err) => {
