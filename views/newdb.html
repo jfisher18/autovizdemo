@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.8.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.0-beta.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.1.0"></script>
+  <title>Dynamic Breakpoints</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <h1>Add a new database</h1>
+  <form action="uploaddb" method="post" enctype="multipart/form-data">
+    <label for="dbname">Database name:</label><br>
+    <input type="text" name="dbname"><br>
+    <label for="db">.db file:</label><br>
+    <input type="file" name="db"><br>
+    <label for="query">Query: (NOTE: query should have a ? for the variable on the slider)</label><br>
+    <textarea rows = "2" cols = "60" name = "query"></textarea><br>
+    <input type="number" name="start">
+    <label for="start">Slider start value</label><br>
+    <input type="number" name="stop">
+    <label for="start">Slider end value (inclusive)</label><br>
+    <input type="number" name="step">
+    <label for="start">Slider step value</label><br>
+    <label for="query">Breakpoint locations: (comma-separated; NOTE: data at breakpoint included in left-hand side)</label><br>
+    <textarea rows = "2" cols = "60" name = "breakpoints"></textarea><br>
+    <input type="submit">
+  </form>
+</body>
+<script src="js/data.js"></script>
