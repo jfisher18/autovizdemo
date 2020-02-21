@@ -11,20 +11,19 @@
   <h1>Add a new database</h1>
   <form action="uploaddb" method="post" enctype="multipart/form-data">
     <label for="dbname">Database name:</label><br>
-    <input type="text" name="dbname"><br>
+    <input type="text" name="dbname" value = "Test" required><br>
     <label for="db">.db file:</label><br>
-    <input type="file" name="db"><br>
+    <input type="file" name="db" required><br>
     <label for="query">Query: (NOTE: query should have a ? for the variable on the slider)</label><br>
-    <textarea rows = "2" cols = "60" name = "query"></textarea><br>
-    <input type="number" name="start">
+    <textarea rows = "2" cols = "60" name = "query">SELECT * FROM invoice_items WHERE TrackId>?</textarea><br>
+    <input type="number" name="start" value = "0" required>
     <label for="start">Slider start value</label><br>
-    <input type="number" name="stop">
+    <input type="number" name="stop" value = "400" required>
     <label for="start">Slider end value (inclusive)</label><br>
-    <input type="number" name="step">
+    <input type="number" name="step" value = "40" required>
     <label for="start">Slider step value</label><br>
     <label for="query">Breakpoint locations: (comma-separated; NOTE: data at breakpoint included in left-hand side)</label><br>
-    <textarea rows = "2" cols = "60" name = "breakpoints"></textarea><br>
+    <textarea rows = "2" cols = "60" name = "breakpoints">50,200,300</textarea><br>
     <input type="submit">
   </form>
 </body>
-<script src="js/data.js"></script>

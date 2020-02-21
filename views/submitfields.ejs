@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.8.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.0.0-beta.12"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.1.0"></script>
+  <title>Dynamic Breakpoints</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <h1>Choose Fields</h1>
+  <form action="submitfields" method="post" enctype="multipart/form-data">
+    <input type="hidden" id="dbname" name="dbname" value=<%=name%>>
+    <%
+    var x = [];
+    var y = [];
+    schema.forEach((field, i) => {
+      x.push(`<input type="radio" name="xaxis" value="${field.name}|${field.type}">
+      <label for="${field.name}|${field.type}">${field.name}</label>`);
+      if (field.type == "REAL"){
+        y.push(`<input type="radio" name="yaxis" value="${field.name}|${field.type}">
+        <label for="${field.name}|${field.type}">${field.name}</label>`);
+      }
+    });
+    %>
+    <label for="xaxis">x-axis field:</label><br>
+    <%-x.join("<br>\n")%>
+    <br><br>
+    <label for="yaxis">y-axis field:</label><br>
+    <%-y.join("<br>\n")%>
+    <br>
+    <br>
+    <label for="encoding">Encoding</label><br>
+    <input type="radio"  name="encoding" value="bar">
+    <label for="bar">Bar</label><br>
+    <input type="radio"  name="encoding" value="line">
+    <label for="line">Line</label><br>
+    <input type="radio"  name="encoding" value="scatter">
+    <label for="scatter">Scatter</label><br>
+    <input type="submit">
+  </form>
+</body>
+<script src="js/data.js"></script>
