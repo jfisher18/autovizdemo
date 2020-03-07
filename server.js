@@ -46,23 +46,23 @@ let pilotdata = new sqlite3.Database(path.join(__dirname, "pilotdata.db"), (err)
 app.post('/submitdata', (req, res) => {
   var results = req.body.results
   pilotdata.run(`INSERT INTO results (method, task_order,
-    t1year, t1month, t1price,
-    t1time, t1mental, t1effort, t1performance, t1frustruation,
+    t1year, t1price,
+    t1time, t1mental, t1effort, t1performance, t1frustruation, t1text,
     t2month, t2price,
-    t2time, t2mental, t2effort, t2performance, t2frustruation,
-    t3year, t3difference,
-    t3time, t3mental, t3effort, t3performance, t3frustruation)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+    t2time, t2mental, t2effort, t2performance, t2frustruation, t2text,
+    t3years,
+    t3time, t3mental, t3effort, t3performance, t3frustruation, t3text)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
     [req.body.method, req.body.order,
-      results[0].answer[0], results[0].answer[1], results[0].answer[2],
+      results[0].answer[0], results[0].answer[1],
       results[0].time,
-      results[0].effort, results[0].mental, results[0].performance, results[0].frustration,
+      results[0].effort, results[0].mental, results[0].performance, results[0].frustration, results[0].textArea,
       results[1].answer[0], results[1].answer[1],
       results[1].time,
-      results[1].effort, results[1].mental, results[1].performance, results[1].frustration,
-      results[2].answer[0], results[2].answer[1],
+      results[1].effort, results[1].mental, results[1].performance, results[1].frustration, results[1].textArea,
+      results[2].answer[0],
       results[2].time,
-      results[2].effort, results[2].mental, results[2].performance, results[2].frustration
+      results[2].effort, results[2].mental, results[2].performance, results[2].frustration, results[2].textArea,
     ],
     (err) => {if (err) throw err}
   );

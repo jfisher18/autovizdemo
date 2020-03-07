@@ -10,18 +10,18 @@
 </head>
 <body>
   <div id = "intro" class = "viewscreen">
-    This experiment will have you perform three data analysis tasks.<br>
-    You will use an interactive data visualization for your analysis.<br>
-    You'll be looking at monthly oil prices over the last 30 years.<br>
-    Press the button to try out the visualization, with random data.<br>
+    In this experiment, you will perform three data analysis tasks using an interactive visualization.<br>
+    We will first show you a tutorial to help familiarize you with the visualization.<br>
+    Then you will complete the analysis tasks.<br>
+    Please try to answer the tasks accurately and quickly.<br>
+    Tasks should be performed using visual judgements, unaided by fingers, rulers,<br>or other external tools.<br>
     <button class = "nicebutton" onclick="dummyData();">Next</button>
   </div>
   <div id = "begintask0" class = "viewscreen">
-    Next, you'll be using the same visualization tool to answer a question about the data.<br>
-    You will now see the real, non-random data.<br>
-    The question you need to answer will be at the top of the screen.<br>
-    When you are finished, press the button at the bottom of the screen.<br>
-    Once you click the button, the visualization will go away, so rememeber your answers.<br>
+    You will now use the same visualization to analyze 30 years of oil prices.<br>
+    For each task, the questions will be at the top of the web page.<br>
+    When you are ready to answer the questions, press the button at the bottom of the screen.<br>
+    When you click the button, the visualization will disappear, so please remember your answers.<br>
     <button class = "nicebutton" onclick="taskStart();">Begin</button>
   </div>
   <div id = "submitAnswer" class = "viewscreen">
@@ -53,6 +53,7 @@
         <option value="2007">2007</option>
         <option value="2008">2008</option>
         <option value="2009">2009</option>
+        <option value="2009">2010</option>
         <option value="2011">2011</option>
         <option value="2012">2012</option>
         <option value="2013">2013</option>
@@ -102,6 +103,12 @@
 
     <br>How insecure, discouraged, irritated, stressed, and annoyed were you?<br>
     Very Low<input class="slider rater" type="range" id="frustration" min="1" max="7" value="4" step="1">Very High<br>
+
+    <br>Please describe your strategy for performing the task:<br>
+    <textarea id="textArea" rows="4" cols="50"></textarea>
+    <br>
+
+
     <button class = "nicebutton" onclick="taskStart();">Begin next task</button>
   </div>
   <div id = "done" class = "viewscreen">
@@ -114,7 +121,7 @@
       <span id ="optionalScale">
         <h3>Note that the y-axis may change as you move the slider.</h3>
       </span>
-      <h3>When you have familiarized yourself, press the button below.</h3>
+      <h3>When you are comfortable using the silder to control the visualization, press "Done with Training" below.</h3>
     </div>
     <div>
       <input class="slider" type="range" id="slider">

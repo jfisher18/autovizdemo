@@ -17,6 +17,7 @@ let rating = document.getElementById('rating');
 let done = document.getElementById('done');
 let tutorial = document.getElementById('tutorial');
 let optionalScale = document.getElementById('optionalScale');
+let textArea = document.getElementById('textArea');
 let inputs = ["year", "month", "value"];
 
 
@@ -78,6 +79,11 @@ async function load_data(fname) {
     gmax = config['gmax']
     gmin = config['gmin']
     method = config['method']
+    const urlParams = new URLSearchParams(window.location.search);
+    const methodParam = urlParams.get('method');
+    if(methodParam){
+      method = methodParam;
+    }
     label = config['label']
     for (index of config['data']){
       dataMap.set(parseFloat(index['index']),index)
@@ -164,6 +170,7 @@ function dummyData() {
     optionalScale.style.display = "none"
   }
   haveAnswer.style.display = "none"
+  taskQuestion.innerText = "Tutorial"
 }
 
 function doneDummy() {
@@ -180,13 +187,9 @@ function answers() {
   time_took = d.getTime()-start_time
   tool.style.display = "none"
   for (let inputName of inputs) {
-    console.log("HERE")
-    console.log(document.getElementById(inputName))
-    console.log(inputName)
     document.getElementById(inputName).style.display = "none"
   }
   for (let input of tasks[task_order[cur_task]].answers) {
-    console.log(input.type)
     document.getElementById(input.type).style.display = "block"
     document.getElementById(`${input.type}Label`).innerText = input.label+":"
   }
@@ -204,14 +207,20 @@ async function taskStart() {
       answers.push(input.value)
       input.value = ""
     }
+    console.log(answers)
     vals.answer = answers
     vals.mental = mentalSlider.value
+    mentalSlider.value = 4
     vals.effort = effortSlider.value
+    effortSlider.value = 4
     vals.performance = performanceSlider.value
+    performanceSlider.value = 4
     vals.frustration = frustrationSlider.value
+    frustrationSlider.value = 4
+    vals.textArea = textArea.value
+    textArea.value = ""
     vals.time = time_took
     tasks_results[task_order[cur_task]] = vals
-    console.log(tasks_results)
   } else {
     await load_data("config.json")
   }
@@ -229,7 +238,7 @@ async function taskStart() {
       body: JSON.stringify({results: tasks_results, method: method, order: task_order.join(' ')})
     });
   } else {
-    taskQuestion.innerText = tasks[task_order[cur_task]].question
+    taskQuestion.innerHTML = `Task ${cur_task+1}:<br>${tasks[task_order[cur_task]].question}`
     tool.style.display = "block"
     updateData();
     begintask0.style.display = "none"
