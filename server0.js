@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const express = require('express');
 const app = express();
-const port = 3000;
+var port = process.env.PORT || 3000;
 var http = require('http').createServer(app);
 var formidable = require('formidable');
 var fs = require('fs');
