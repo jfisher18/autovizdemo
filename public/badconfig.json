@@ -1,6 +1,6 @@
 {
     "query": "SELECT * FROM monthly_prices WHERE YEAR = ?",
-    "method": "per-chart",
+    "method": "global",
     "label": "Year",
     "tasks": [
       "What month has the highest price across all years, and what is that price?",

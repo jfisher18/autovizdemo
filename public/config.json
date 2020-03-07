@@ -1,14 +1,13 @@
 {
     "query": "SELECT * FROM monthly_prices WHERE YEAR = ?",
-    "method": "breakpoints",
+    "method": "global",
     "label": "Year",
     "tasks": [
       {
         "question":
-        "What month has the highest price across all years, in what year does it occur, and what is that price?",
+        "What year had the highest October price, and what is that price?",
         "answers": [
           {"type": "year", "label": "Year"},
-          {"type": "month", "label": "Month"},
           {"type": "value", "label": "Price"}
         ]
       },
@@ -22,10 +21,9 @@
       },
       {
         "question":
-        "Which year has the biggest absolute difference in price between February and August, and what is the difference?",
+        "In how many years is the price for August within $5 of the price for February?",
         "answers": [
-          {"type": "year", "label": "Year"},
-          {"type": "value", "label": "Difference"}
+          {"type": "value", "label": "Number of years"}
         ]
       }
     ],
