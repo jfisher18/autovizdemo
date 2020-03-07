@@ -15,6 +15,8 @@ let performanceSlider = document.querySelector('#performance');
 let frustrationSlider = document.querySelector('#frustration');
 let rating = document.getElementById('rating');
 let done = document.getElementById('done');
+let veryFinal = document.getElementById('veryFinal');
+let finalComment = document.getElementById('finalComment');
 let tutorial = document.getElementById('tutorial');
 let optionalScale = document.getElementById('optionalScale');
 let textArea = document.getElementById('textArea');
@@ -207,7 +209,6 @@ async function taskStart() {
       answers.push(input.value)
       input.value = ""
     }
-    console.log(answers)
     vals.answer = answers
     vals.mental = mentalSlider.value
     mentalSlider.value = 4
@@ -229,14 +230,6 @@ async function taskStart() {
     begintask0.style.display = "none"
     begintask.style.display = "none"
     done.style.display = "block"
-    fetch("/submitdata", {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: "POST",
-      body: JSON.stringify({results: tasks_results, method: method, order: task_order.join(' ')})
-    });
   } else {
     taskQuestion.innerHTML = `Task ${cur_task+1}:<br>${tasks[task_order[cur_task]].question}`
     tool.style.display = "block"
@@ -247,6 +240,19 @@ async function taskStart() {
     start_time = d.getTime()
   }
   return false
+}
+
+function finalEnding(){
+  fetch("/submitdata", {
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    method: "POST",
+    body: JSON.stringify({results: tasks_results, method: method, order: task_order.join(' '), comment: finalComment.value})
+  });
+  done.style.display = "none"
+  veryFinal.style.display = "block"
 }
 
 function submit() {

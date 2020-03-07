@@ -70,6 +70,10 @@ h1 {
   display: none;
 }
 
+#veryFinal {
+  display: none;
+}
+
 #submitAnswer {
   display: none;
 }

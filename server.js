@@ -51,8 +51,9 @@ app.post('/submitdata', (req, res) => {
     t2month, t2price,
     t2time, t2mental, t2effort, t2performance, t2frustruation, t2text,
     t3years,
-    t3time, t3mental, t3effort, t3performance, t3frustruation, t3text)
-    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+    t3time, t3mental, t3effort, t3performance, t3frustruation, t3text,
+    finalComment)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
     [req.body.method, req.body.order,
       results[0].answer[0], results[0].answer[1],
       results[0].time,
@@ -63,6 +64,7 @@ app.post('/submitdata', (req, res) => {
       results[2].answer[0],
       results[2].time,
       results[2].effort, results[2].mental, results[2].performance, results[2].frustration, results[2].textArea,
+      req.body.comment
     ],
     (err) => {if (err) throw err}
   );
