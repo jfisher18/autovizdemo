@@ -11,19 +11,19 @@
   <h1>Add a new database</h1>
   <form action="uploaddb" method="post" enctype="multipart/form-data">
     <label for="dbname">Database name:</label><br>
-    <input type="text" name="dbname" value = "Test" required><br>
+    <input type="text" name="dbname" value = "OilPrices" required><br>
     <label for="db">.db file:</label><br>
     <input type="file" name="db" required><br>
     <label for="query">Query: (NOTE: query should have a ? for the variable on the slider)</label><br>
-    <textarea rows = "2" cols = "60" name = "query">SELECT * FROM invoice_items WHERE TrackId>?</textarea><br>
-    <input type="number" name="start" value = "0" required>
+    <textarea rows = "2" cols = "60" name = "query">SELECT * FROM monthly_prices WHERE YEAR = ?</textarea><br>
+    <input type="number" name="start" value = "1988" required>
     <label for="start">Slider start value</label><br>
-    <input type="number" name="stop" value = "400" required>
+    <input type="number" name="stop" value = "2018" required>
     <label for="start">Slider end value (inclusive)</label><br>
-    <input type="number" name="step" value = "40" required>
+    <input type="number" name="step" value = "1" required>
     <label for="start">Slider step value</label><br>
     <label for="query">Breakpoint locations: (comma-separated; NOTE: data at breakpoint included in left-hand side)</label><br>
-    <textarea rows = "2" cols = "60" name = "breakpoints">50,200,300</textarea><br>
+    <textarea rows = "2" cols = "60" name = "breakpoints">2006,2016</textarea><br>
     <input type="submit">
   </form>
 </body>
