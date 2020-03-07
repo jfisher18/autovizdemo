@@ -5,7 +5,7 @@
     "tasks": [
       {
         "question":
-        "What year had the highest October price, and what is that price?",
+        "What year had the highest March price, and what is that price?",
         "answers": [
           {"type": "year", "label": "Year"},
           {"type": "value", "label": "Price"}
@@ -21,7 +21,7 @@
       },
       {
         "question":
-        "In how many years is the price for August within $5 of the price for February?",
+        "In how many years was the price for August within $5 of the price for February?",
         "answers": [
           {"type": "value", "label": "Number of years"}
         ]
